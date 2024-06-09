@@ -4,13 +4,13 @@ using Raylib_cs;
 
 namespace PacMan.Models
 {
-    public class PacHandsomeGuy : ACharacter
+    public class GhostsClyde : AGhosts
     {
         private static readonly Random _rand = new Random();
 
-        public PacHandsomeGuy(string name) : base(name)
+        public GhostsClyde(string name) : base(name)
         {
-            Color = Color.Red;
+            Texture = Raylib.LoadTexture("assets/sprites/clyde.png");
         }
 
 
