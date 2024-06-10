@@ -4,17 +4,16 @@ using Raylib_cs;
 
 namespace PacMan.Models
 {
-    public class BotPac : APac
+    public class BotPac2 : APac
     {
         private static readonly Random _rand = new Random();
 
-        public BotPac(string name) : base(name)
+        public BotPac2(string name) : base(name)
         {
-            Texture = Raylib.LoadTexture("assets/sprites/pac/pacNarrow2.png");
+            Texture = Raylib.LoadTexture("assets/sprites/pac/deathAnim/death1.png");
             PositionY = 400;
-            PositionX = 300;
+            PositionX = 400;
         }
-
 
         protected override void GenerateStats()
         {

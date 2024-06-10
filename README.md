@@ -45,3 +45,32 @@ class AGhosts {
     + "constructor" AGhosts(name : string)
     # void "virtual" GenerateStats()
 }
+
+
+class APac {
+  <<abstract>>
+  + "constructor" APac(name : string)
+}
+
+class BotPac {
+  <<class>>
+  + "constructor" APac(name : string)
+  # GenerateStats()
+}
+
+class BotPac2 {
+  <<class>>
+  + "constructor" APac(name : string)
+  # GenerateStats()
+}
+
+class GhostsClyde {
+  <<class>>
+  + "constructor" APac(name : string)
+  # GenerateStats()
+}
+
+APac --|> AGhosts
+BotPac --|> APac
+BotPac2 --|> APac
+GhostsClyde --|> AGhosts

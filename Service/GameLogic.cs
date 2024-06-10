@@ -38,7 +38,7 @@ namespace PacMan.Service
             CheckPositionBeforeToUpdatePosition(ghost, newX, newY);
         }
 
-        public static void UpdatePacManPosition(BotPac botPac, GhostsClyde GhostsClyde)
+        public static void UpdatePacManPosition(APac botPac, GhostsClyde GhostsClyde)
         {
             int newX = botPac.PositionX;
             int newY = botPac.PositionY;
@@ -71,6 +71,14 @@ namespace PacMan.Service
         }
 
         public static void GhostIsDeadOrNo(BotPac botPac, GhostsClyde GhostsClyde)
+        {
+            if (botPac.PositionX == GhostsClyde.PositionX && botPac.PositionY == GhostsClyde.PositionY)
+            {
+                GhostsClyde.Dead = true;
+            }
+        }
+
+        public static void GhostIsDeadOrNo2(BotPac2 botPac, GhostsClyde GhostsClyde)
         {
             if (botPac.PositionX == GhostsClyde.PositionX && botPac.PositionY == GhostsClyde.PositionY)
             {

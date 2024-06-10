@@ -22,6 +22,7 @@ class Program
 
         GhostsClyde GhostsClyde = new("GhostsClyde");
         BotPac BotPac = new("BotPac");
+        BotPac2 BotPac2 = new("BotPac2");
 
         while (!Raylib.WindowShouldClose())
         {
@@ -31,9 +32,12 @@ class Program
 
             GameLogic.DrawGhost(GhostsClyde);
             GameLogic.DrawGhost(BotPac);
+            GameLogic.DrawGhost(BotPac2);
             GameLogic.UpdateGhostPosition(GhostsClyde);
             GameLogic.UpdatePacManPosition(BotPac, GhostsClyde);
+            GameLogic.UpdatePacManPosition(BotPac2, GhostsClyde);
             GameLogic.GhostIsDeadOrNo(BotPac, GhostsClyde);
+            GameLogic.GhostIsDeadOrNo2(BotPac2, GhostsClyde);
             GameLogic.CheckStateGame(GhostsClyde);
 
             Raylib.EndDrawing();
