@@ -54,19 +54,19 @@ class APac {
 
 class BotPac {
   <<class>>
-  + "constructor" APac(name : string)
+  + "constructor" BotPac(name : string)
   # GenerateStats()
 }
 
 class BotPac2 {
   <<class>>
-  + "constructor" APac(name : string)
+  + "constructor" BotPac2(name : string)
   # GenerateStats()
 }
 
 class GhostsClyde {
   <<class>>
-  + "constructor" APac(name : string)
+  + "constructor" GhostsClyde(name : string)
   # GenerateStats()
 }
 
