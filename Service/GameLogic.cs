@@ -41,9 +41,37 @@ namespace PacMan.Service
             }
         }
 
+        public static void UpdatePacManPosition(BotPac botPac, GhostsClyde GhostsClyde)
+        {
+            int newX = botPac.PositionX;
+            int newY = botPac.PositionY;
+
+            int dx = Math.Sign(GhostsClyde.PositionX - botPac.PositionX);
+            int dy = Math.Sign(GhostsClyde.PositionY - botPac.PositionY);
+
+            newX += dx;
+            newY += dy;
+
+            _moveTimer += Raylib.GetFrameTime();
+            if (_moveTimer < 1.0 - botPac.Speed)
+                return;
+            _moveTimer -= 1.0 - botPac.Speed;
+
+            if (newX >= 0 && newX < WindowsGame.Width && newY >= 0 && newY < WindowsGame.Length)
+            {
+                botPac.PositionX = newX;
+                botPac.PositionY = newY;
+            }
+        }
+
         public static void DrawGhost(GhostsClyde ghost)
         {
-            Raylib.DrawTexture(GhostsClyde.Texture, ghost.PositionX, ghost.PositionY, Color.White);
+            Raylib.DrawTexture(ghost.Texture, ghost.PositionX, ghost.PositionY, Color.White);
+        }
+
+        public static void DrawPac(BotPac BotPac)
+        {
+            Raylib.DrawTexture(BotPac.Texture, BotPac.PositionX, BotPac.PositionY, Color.White);
         }
 
 

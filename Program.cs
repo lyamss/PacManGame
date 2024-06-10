@@ -12,7 +12,7 @@ class Program
         Raylib.SetTraceLogLevel(TraceLogLevel.Fatal);
 
         Raylib.InitWindow(WindowsGame.Width, WindowsGame.Length, "PacMan Game");
-        
+
         Texture2D background = Raylib.LoadTexture("assets/maps/map3-12.png");
 
         WindowsGame.Length = background.Height;
@@ -21,6 +21,7 @@ class Program
         Raylib.SetWindowSize(WindowsGame.Width, WindowsGame.Length);
 
         GhostsClyde GhostsClyde = new("GhostsClyde");
+        BotPac BotPac = new("BotPac");
 
         while (!Raylib.WindowShouldClose())
         {
@@ -29,7 +30,9 @@ class Program
             Raylib.DrawTexture(background, 0, 0, Color.White);
 
             GameLogic.DrawGhost(GhostsClyde);
+            GameLogic.DrawPac(BotPac);
             GameLogic.UpdateGhostPosition(GhostsClyde);
+            GameLogic.UpdatePacManPosition(BotPac, GhostsClyde);
             GameLogic.CheckStateGame();
 
             Raylib.EndDrawing();

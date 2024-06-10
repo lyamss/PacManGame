@@ -28,8 +28,8 @@ namespace PacMan.Abstract
         }
 
 
-        private static Texture2D _texture;
-        public static Texture2D Texture
+        private Texture2D _texture;
+        public Texture2D Texture
         {
             get { return _texture; }
             protected set { _texture = value; }

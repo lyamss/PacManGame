@@ -11,7 +11,7 @@ dotnet build
 ```
 
 ```
-cd ./bin/Debug
+cd ./bin/Debug/net8.0
 ```
 
 ```
