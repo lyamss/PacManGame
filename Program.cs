@@ -30,10 +30,11 @@ class Program
             Raylib.DrawTexture(background, 0, 0, Color.White);
 
             GameLogic.DrawGhost(GhostsClyde);
-            GameLogic.DrawPac(BotPac);
+            GameLogic.DrawGhost(BotPac);
             GameLogic.UpdateGhostPosition(GhostsClyde);
             GameLogic.UpdatePacManPosition(BotPac, GhostsClyde);
-            GameLogic.CheckStateGame();
+            GameLogic.GhostIsDeadOrNo(BotPac, GhostsClyde);
+            GameLogic.CheckStateGame(GhostsClyde);
 
             Raylib.EndDrawing();
         }

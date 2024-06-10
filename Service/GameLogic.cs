@@ -1,4 +1,5 @@
-﻿using PacMan.Models;
+﻿using PacMan.Abstract;
+using PacMan.Models;
 using Raylib_cs;
 
 namespace PacMan.Service
@@ -34,11 +35,7 @@ namespace PacMan.Service
                 newY += (int)Math.Round(ghost.Speed);
             }
 
-            if (newX >= 0 && newX < WindowsGame.Width && newY >= 0 && newY < WindowsGame.Length)
-            {
-                ghost.PositionX = newX;
-                ghost.PositionY = newY;
-            }
+            CheckPositionBeforeToUpdatePosition(ghost, newX, newY);
         }
 
         public static void UpdatePacManPosition(BotPac botPac, GhostsClyde GhostsClyde)
@@ -57,30 +54,37 @@ namespace PacMan.Service
                 return;
             _moveTimer -= 1.0 - botPac.Speed;
 
-            if (newX >= 0 && newX < WindowsGame.Width && newY >= 0 && newY < WindowsGame.Length)
-            {
-                botPac.PositionX = newX;
-                botPac.PositionY = newY;
-            }
+            CheckPositionBeforeToUpdatePosition(botPac, newX, newY);
         }
 
-        public static void DrawGhost(GhostsClyde ghost)
+        public static void DrawGhost(AGhosts ghost)
         {
             Raylib.DrawTexture(ghost.Texture, ghost.PositionX, ghost.PositionY, Color.White);
         }
 
-        public static void DrawPac(BotPac BotPac)
-        {
-            Raylib.DrawTexture(BotPac.Texture, BotPac.PositionX, BotPac.PositionY, Color.White);
-        }
-
-
-        public static void CheckStateGame()
+        public static void CheckStateGame(GhostsClyde GhostsClyde)
         {
             if (GhostsClyde.Dead)
                 WindowsGame.DrawDead();
             if (GhostsClyde.Won)
                 WindowsGame.DrawWon();
+        }
+
+        public static void GhostIsDeadOrNo(BotPac botPac, GhostsClyde GhostsClyde)
+        {
+            if (botPac.PositionX == GhostsClyde.PositionX && botPac.PositionY == GhostsClyde.PositionY)
+            {
+                GhostsClyde.Dead = true;
+            }
+        }
+
+        private static void CheckPositionBeforeToUpdatePosition(AGhosts ghost, int newX, int newY)
+        {
+            if (newX >= 0 && newX < WindowsGame.Width && newY >= 0 && newY < WindowsGame.Length)
+            {
+                ghost.PositionX = newX;
+                ghost.PositionY = newY;
+            }
         }
     }
 }

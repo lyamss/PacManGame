@@ -36,8 +36,8 @@ namespace PacMan.Abstract
         }
 
 
-        public static bool Dead = false;
-        public static bool Won = false;
+        public bool Dead = false;
+        public bool Won = false;
         protected string Name;
         protected int LifePoint;
         private static readonly Random _rand = new();
