@@ -2,9 +2,9 @@
 using Raylib_cs;
 namespace PacMan.Abstract
 {
-    public abstract class AGhosts
+    public abstract class ABody
     {
-        private double _speed = 0.9f;
+        private double _speed = 1.9f;
         public double Speed
         {
             get { return _speed; }
@@ -43,7 +43,7 @@ namespace PacMan.Abstract
         private static readonly Random _rand = new();
 
 
-        protected AGhosts(string Name) => this.Name = Name;
+        protected ABody(string Name) => this.Name = Name;
 
 
         protected virtual void GenerateStats()

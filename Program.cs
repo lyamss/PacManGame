@@ -33,12 +33,19 @@ class Program
             GameLogic.DrawGhost(GhostsClyde);
             GameLogic.DrawGhost(BotPac);
             GameLogic.DrawGhost(BotPac2);
-            GameLogic.UpdateGhostPosition(GhostsClyde);
+
+
+            GameLogic.UpdateGhostsPosition(GhostsClyde);
             GameLogic.UpdatePacManPosition(BotPac, GhostsClyde);
             GameLogic.UpdatePacManPosition(BotPac2, GhostsClyde);
+
+
             GameLogic.GhostIsDeadOrNo(BotPac, GhostsClyde);
-            GameLogic.GhostIsDeadOrNo2(BotPac2, GhostsClyde);
+            GameLogic.GhostIsDeadOrNo(BotPac2, GhostsClyde);
+
             GameLogic.CheckStateGame(GhostsClyde);
+
+            GameLogic.UpdateRestartGame(GhostsClyde);
 
             Raylib.EndDrawing();
         }

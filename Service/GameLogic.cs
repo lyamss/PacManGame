@@ -1,5 +1,4 @@
 ﻿using PacMan.Abstract;
-using PacMan.Models;
 using Raylib_cs;
 
 namespace PacMan.Service
@@ -8,13 +7,8 @@ namespace PacMan.Service
     {
         private static double _moveTimer = 0.0;
 
-        public static void UpdateGhostPosition(GhostsClyde ghost)
+        public static void UpdateGhostsPosition(AGhost ghost)
         {
-            _moveTimer += Raylib.GetFrameTime();
-            if (_moveTimer < 1.0 - ghost.Speed)
-                return;
-            _moveTimer -= 1.0 - ghost.Speed;
-
             int newX = ghost.PositionX;
             int newY = ghost.PositionY;
 
@@ -35,64 +29,73 @@ namespace PacMan.Service
                 newY += (int)Math.Round(ghost.Speed);
             }
 
-            CheckPositionBeforeToUpdatePosition(ghost, newX, newY);
+            UpdatePosition(ghost, newX, newY, ghost.Speed);
         }
 
-        public static void UpdatePacManPosition(APac botPac, GhostsClyde GhostsClyde)
+        public static void UpdatePacManPosition(APac botPac, AGhost Ghosts)
         {
             int newX = botPac.PositionX;
             int newY = botPac.PositionY;
 
-            int dx = Math.Sign(GhostsClyde.PositionX - botPac.PositionX);
-            int dy = Math.Sign(GhostsClyde.PositionY - botPac.PositionY);
+            int dx = Math.Sign(Ghosts.PositionX - botPac.PositionX);
+            int dy = Math.Sign(Ghosts.PositionY - botPac.PositionY);
 
             newX += dx;
             newY += dy;
 
-            _moveTimer += Raylib.GetFrameTime();
-            if (_moveTimer < 1.0 - botPac.Speed)
-                return;
-            _moveTimer -= 1.0 - botPac.Speed;
-
-            CheckPositionBeforeToUpdatePosition(botPac, newX, newY);
+            UpdatePosition(botPac, newX, newY, botPac.Speed);
         }
 
-        public static void DrawGhost(AGhosts ghost)
+        public static void DrawGhost(ABody body)
         {
-            Raylib.DrawTexture(ghost.Texture, ghost.PositionX, ghost.PositionY, Color.White);
+            Raylib.DrawTexture(body.Texture, body.PositionX, body.PositionY, Color.White);
         }
 
-        public static void CheckStateGame(GhostsClyde GhostsClyde)
+        public static void CheckStateGame(AGhost Ghosts)
         {
-            if (GhostsClyde.Dead)
+            if (Ghosts.Dead)
                 WindowsGame.DrawDead();
-            if (GhostsClyde.Won)
+            if (Ghosts.Won)
                 WindowsGame.DrawWon();
         }
 
-        public static void GhostIsDeadOrNo(BotPac botPac, GhostsClyde GhostsClyde)
+        public static void GhostIsDeadOrNo(APac botPac, AGhost Ghosts)
         {
-            if (botPac.PositionX == GhostsClyde.PositionX && botPac.PositionY == GhostsClyde.PositionY)
+            if (botPac.PositionX == Ghosts.PositionX && botPac.PositionY == Ghosts.PositionY)
             {
-                GhostsClyde.Dead = true;
+                Ghosts.Dead = true;
             }
         }
 
-        public static void GhostIsDeadOrNo2(BotPac2 botPac, GhostsClyde GhostsClyde)
+        private static void CheckPositionBeforeToUpdatePosition(ABody body, int newX, int newY)
         {
-            if (botPac.PositionX == GhostsClyde.PositionX && botPac.PositionY == GhostsClyde.PositionY)
+            if (newX >= 0 && newX < WindowsGame.Width && newY >= 0 && newY < WindowsGame.Length && (!body.Dead))
             {
-                GhostsClyde.Dead = true;
+                body.PositionX = newX;
+                body.PositionY = newY;
             }
         }
 
-        private static void CheckPositionBeforeToUpdatePosition(AGhosts ghost, int newX, int newY)
+        public static void UpdateRestartGame(AGhost ghost)
         {
-            if (newX >= 0 && newX < WindowsGame.Width && newY >= 0 && newY < WindowsGame.Length)
+            if((Raylib.IsKeyDown(KeyboardKey.Space) && ghost.Dead) || (ghost.Won && Raylib.IsKeyDown(KeyboardKey.Space)))
             {
-                ghost.PositionX = newX;
-                ghost.PositionY = newY;
+                ghost.Dead = false;
+                ghost.Won = false;
+                Random rnd = new();
+                ghost.PositionX = rnd.Next(0, WindowsGame.Width);
+                ghost.PositionY = rnd.Next(0, WindowsGame.Length);
             }
+        }
+
+        private static void UpdatePosition(ABody body, int newX, int newY, double speed)
+        {
+            _moveTimer += Raylib.GetFrameTime();
+            if (_moveTimer < 2.0 - speed)
+                return;
+            _moveTimer -= 2.0 - speed;
+
+            CheckPositionBeforeToUpdatePosition(body, newX, newY);
         }
     }
 }

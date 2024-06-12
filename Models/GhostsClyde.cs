@@ -4,7 +4,7 @@ using Raylib_cs;
 
 namespace PacMan.Models
 {
-    public class GhostsClyde : AGhosts
+    public class GhostsClyde : AGhost
     {
         private static readonly Random _rand = new Random();
 

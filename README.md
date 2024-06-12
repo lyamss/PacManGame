@@ -23,7 +23,7 @@ cd ./bin/Debug/net8.0
 classDiagram
 
 
-class AGhosts {
+class ABody {
   <<abstract>>
     - _speed : double
     + double GetSpeed()
@@ -42,7 +42,7 @@ class AGhosts {
     # Name : string
     # LifePoint : int
     - _rand : Random
-    + "constructor" AGhosts(name : string)
+    + "constructor" ABody(name : string)
     # void "virtual" GenerateStats()
 }
 
@@ -50,6 +50,11 @@ class AGhosts {
 class APac {
   <<abstract>>
   + "constructor" APac(name : string)
+}
+
+class AGhost {
+  <<abstract>>
+  + "constructor" AGhost(name : string)
 }
 
 class BotPac {
@@ -70,7 +75,8 @@ class GhostsClyde {
   # GenerateStats()
 }
 
-APac --|> AGhosts
+APac --|> ABody
+GhostsClyde --|> AGhost
 BotPac --|> APac
 BotPac2 --|> APac
-GhostsClyde --|> AGhosts
+AGhost --|> ABody

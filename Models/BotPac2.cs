@@ -11,8 +11,8 @@ namespace PacMan.Models
         public BotPac2(string name) : base(name)
         {
             Texture = Raylib.LoadTexture("assets/sprites/pac/deathAnim/death1.png");
-            PositionY = 400;
-            PositionX = 400;
+            PositionY = 0;
+            PositionX = 0;
         }
 
         protected override void GenerateStats()
