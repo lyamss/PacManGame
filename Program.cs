@@ -20,9 +20,9 @@ class Program
 
         Raylib.SetWindowSize(WindowsGame.Width, WindowsGame.Length);
 
-        GhostsClyde GhostsClyde = new("GhostsClyde");
-        BotPac BotPac = new("BotPac");
-        BotPac2 BotPac2 = new("BotPac2");
+        Ghosts GhostsClyde = new("GhostsClyde", 1.9f, 12, 230, Raylib.LoadTexture("assets/sprites/clyde.png"));
+        BotPac BotPac = new("BotPac", 1.9f, 300, 400, Raylib.LoadTexture("assets/sprites/pac/pacNarrow2.png"));
+        BotPac BotPac2 = new("BotPac2", 1.9f, 0, 0, Raylib.LoadTexture("assets/sprites/pac/deathAnim/death1.png"));
 
         while (!Raylib.WindowShouldClose())
         {

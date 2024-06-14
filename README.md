@@ -1,6 +1,6 @@
 # Project to create a PacMan
 
-Pacman game in c# using raylib
+Pacman game in C# using raylib
 
 the objective is to flee the enemies and collect all the balls to win
 
@@ -27,56 +27,32 @@ class ABody {
   <<abstract>>
     - _speed : double
     + double GetSpeed()
-    # void SetSpeed(speed: double)
+    - void SetSpeed(speed: double)
     - _positionX : int
     + int GetPositionX()
-    # void SetPositionX(positionX: int)
+    + void SetPositionX(positionX: int)
     - _positionY : int
     + int GetPositionY()
-    # void SetPositionY(positionY: int)
+    + void SetPositionY(positionY: int)
     - _texture : Texture2D
     + Texture2D GetTexture()
-    # void SetTexture(texture: Texture2D)
+    - void SetTexture(texture: Texture2D)
     + Dead : bool
     + Won : bool
     # Name : string
-    # LifePoint : int
-    - _rand : Random
-    + "constructor" ABody(name : string)
-    # void "virtual" GenerateStats()
+    + "constructor" ABody(name : string, double Speed, int PositionX, int PositionY, Texture2D Texture)
 }
 
-
-class APac {
-  <<abstract>>
-  + "constructor" APac(name : string)
-}
-
-class AGhost {
-  <<abstract>>
-  + "constructor" AGhost(name : string)
-}
 
 class BotPac {
   <<class>>
-  + "constructor" BotPac(name : string)
-  # GenerateStats()
+  + "constructor" BotPac(name : string, double Speed, int PositionX, int PositionY, Texture2D Texture)
 }
 
-class BotPac2 {
+class Ghosts {
   <<class>>
-  + "constructor" BotPac2(name : string)
-  # GenerateStats()
+  + "constructor" Ghosts(name : string, double Speed, int PositionX, int PositionY, Texture2D Texture)
 }
 
-class GhostsClyde {
-  <<class>>
-  + "constructor" GhostsClyde(name : string)
-  # GenerateStats()
-}
-
-APac --|> ABody
-GhostsClyde --|> AGhost
-BotPac --|> APac
-BotPac2 --|> APac
-AGhost --|> ABody
+BotPac --|> ABody
+Ghosts --|> ABody

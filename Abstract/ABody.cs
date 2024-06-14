@@ -1,5 +1,4 @@
-﻿using PacMan.Service;
-using Raylib_cs;
+﻿using Raylib_cs;
 namespace PacMan.Abstract
 {
     public abstract class ABody
@@ -8,7 +7,7 @@ namespace PacMan.Abstract
         public double Speed
         {
             get { return _speed; }
-            protected set { _speed = value; }
+            private set { _speed = value; }
         }
 
 
@@ -32,24 +31,21 @@ namespace PacMan.Abstract
         public Texture2D Texture
         {
             get { return _texture; }
-            protected set { _texture = value; }
+            private set { _texture = value; }
         }
 
 
         public bool Dead = false;
         public bool Won = false;
         protected string Name;
-        protected int LifePoint;
-        private static readonly Random _rand = new();
 
-
-        protected ABody(string Name) => this.Name = Name;
-
-
-        protected virtual void GenerateStats()
+        protected ABody(string Name, double Speed, int PositionX, int PositionY, Texture2D Texture)
         {
-            Dice diceOneConstruct = new(50);
-            LifePoint = diceOneConstruct.DiceShooter(_rand);
+            this.Name = Name;
+            this.Speed = Speed;
+            this.PositionX = PositionX;
+            this.PositionY = PositionY;
+            this.Texture = Texture;
         }
     }
 }

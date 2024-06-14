@@ -1,25 +1,7 @@
 ﻿using PacMan.Abstract;
-using PacMan.Service;
 using Raylib_cs;
 
 namespace PacMan.Models
 {
-    public class BotPac : APac
-    {
-        private static readonly Random _rand = new Random();
-
-        public BotPac(string name) : base(name)
-        {
-            Texture = Raylib.LoadTexture("assets/sprites/pac/pacNarrow2.png");
-            PositionY = 400;
-            PositionX = 300;
-        }
-
-
-        protected override void GenerateStats()
-        {
-            Dice diceOneConstruct = new(30);
-            LifePoint = diceOneConstruct.DiceShooter(_rand);
-        }
-    }
+    public class BotPac(string name, double Speed, int PositionX, int PositionY, Texture2D Texture) : ABody(name, Speed, PositionX, PositionY, Texture) { }
 }

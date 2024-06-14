@@ -1,13 +1,13 @@
 ﻿using PacMan.Abstract;
 using Raylib_cs;
-
+using PacMan.Models;
 namespace PacMan.Service
 {
     public static class GameLogic
     {
         private static double _moveTimer = 0.0;
 
-        public static void UpdateGhostsPosition(AGhost ghost)
+        public static void UpdateGhostsPosition(Ghosts ghost)
         {
             int newX = ghost.PositionX;
             int newY = ghost.PositionY;
@@ -32,7 +32,7 @@ namespace PacMan.Service
             UpdatePosition(ghost, newX, newY, ghost.Speed);
         }
 
-        public static void UpdatePacManPosition(APac botPac, AGhost Ghosts)
+        public static void UpdatePacManPosition(BotPac botPac, Ghosts Ghosts)
         {
             int newX = botPac.PositionX;
             int newY = botPac.PositionY;
@@ -51,7 +51,7 @@ namespace PacMan.Service
             Raylib.DrawTexture(body.Texture, body.PositionX, body.PositionY, Color.White);
         }
 
-        public static void CheckStateGame(AGhost Ghosts)
+        public static void CheckStateGame(Ghosts Ghosts)
         {
             if (Ghosts.Dead)
                 WindowsGame.DrawDead();
@@ -59,7 +59,7 @@ namespace PacMan.Service
                 WindowsGame.DrawWon();
         }
 
-        public static void GhostIsDeadOrNo(APac botPac, AGhost Ghosts)
+        public static void GhostIsDeadOrNo(BotPac botPac, Ghosts Ghosts)
         {
             if (botPac.PositionX == Ghosts.PositionX && botPac.PositionY == Ghosts.PositionY)
             {
@@ -76,7 +76,7 @@ namespace PacMan.Service
             }
         }
 
-        public static void UpdateRestartGame(AGhost ghost)
+        public static void UpdateRestartGame(Ghosts ghost)
         {
             if((Raylib.IsKeyDown(KeyboardKey.Space) && ghost.Dead) || (ghost.Won && Raylib.IsKeyDown(KeyboardKey.Space)))
             {
