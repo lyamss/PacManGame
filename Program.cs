@@ -24,28 +24,31 @@ class Program
         BotPac BotPac = new("BotPac", 1.9f, 300, 400, Raylib.LoadTexture("assets/sprites/pac/pacNarrow2.png"));
         BotPac BotPac2 = new("BotPac2", 1.9f, 0, 0, Raylib.LoadTexture("assets/sprites/pac/deathAnim/death1.png"));
 
+        GameLogic gameL = new();
+
         while (!Raylib.WindowShouldClose())
         {
             Raylib.BeginDrawing();
             Raylib.ClearBackground(Color.White);
             Raylib.DrawTexture(background, 0, 0, Color.White);
 
-            GameLogic.DrawGhost(GhostsClyde);
-            GameLogic.DrawGhost(BotPac);
-            GameLogic.DrawGhost(BotPac2);
+
+            gameL.DrawGhost(GhostsClyde);
+            gameL.DrawGhost(BotPac);
+            gameL.DrawGhost(BotPac2);
 
 
-            GameLogic.UpdateGhostsPosition(GhostsClyde);
-            GameLogic.UpdatePacManPosition(BotPac, GhostsClyde);
-            GameLogic.UpdatePacManPosition(BotPac2, GhostsClyde);
+            gameL.UpdateGhostsPosition(GhostsClyde);
+            gameL.UpdatePacManPosition(BotPac, GhostsClyde);
+            gameL.UpdatePacManPosition(BotPac2, GhostsClyde);
 
 
-            GameLogic.GhostIsDeadOrNo(BotPac, GhostsClyde);
-            GameLogic.GhostIsDeadOrNo(BotPac2, GhostsClyde);
+            gameL.GhostIsDeadOrNo(BotPac, GhostsClyde);
+            gameL.GhostIsDeadOrNo(BotPac2, GhostsClyde);
 
-            GameLogic.CheckStateGame(GhostsClyde);
+            gameL.CheckStateGame(GhostsClyde);
 
-            GameLogic.UpdateRestartGame(GhostsClyde);
+            gameL.UpdateRestartGame(GhostsClyde);
 
             Raylib.EndDrawing();
         }

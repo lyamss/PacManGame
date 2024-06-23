@@ -3,11 +3,9 @@ using Raylib_cs;
 using PacMan.Models;
 namespace PacMan.Service
 {
-    public static class GameLogic
+    public class GameLogic : AGameLogicBase
     {
-        private static double _moveTimer = 0.0;
-
-        public static void UpdateGhostsPosition(Ghosts ghost)
+        public override void UpdateGhostsPosition(Ghosts ghost)
         {
             int newX = ghost.PositionX;
             int newY = ghost.PositionY;
@@ -32,7 +30,7 @@ namespace PacMan.Service
             UpdatePosition(ghost, newX, newY, ghost.Speed);
         }
 
-        public static void UpdatePacManPosition(BotPac botPac, Ghosts Ghosts)
+        public override void UpdatePacManPosition(BotPac botPac, Ghosts Ghosts)
         {
             int newX = botPac.PositionX;
             int newY = botPac.PositionY;
@@ -46,37 +44,7 @@ namespace PacMan.Service
             UpdatePosition(botPac, newX, newY, botPac.Speed);
         }
 
-        public static void DrawGhost(ABody body)
-        {
-            Raylib.DrawTexture(body.Texture, body.PositionX, body.PositionY, Color.White);
-        }
-
-        public static void CheckStateGame(Ghosts Ghosts)
-        {
-            if (Ghosts.Dead)
-                WindowsGame.DrawDead();
-            if (Ghosts.Won)
-                WindowsGame.DrawWon();
-        }
-
-        public static void GhostIsDeadOrNo(BotPac botPac, Ghosts Ghosts)
-        {
-            if (botPac.PositionX == Ghosts.PositionX && botPac.PositionY == Ghosts.PositionY)
-            {
-                Ghosts.Dead = true;
-            }
-        }
-
-        private static void CheckPositionBeforeToUpdatePosition(ABody body, int newX, int newY)
-        {
-            if (newX >= 0 && newX < WindowsGame.Width && newY >= 0 && newY < WindowsGame.Length && (!body.Dead))
-            {
-                body.PositionX = newX;
-                body.PositionY = newY;
-            }
-        }
-
-        public static void UpdateRestartGame(Ghosts ghost)
+        public override void UpdateRestartGame(Ghosts ghost)
         {
             if((Raylib.IsKeyDown(KeyboardKey.Space) && ghost.Dead) || (ghost.Won && Raylib.IsKeyDown(KeyboardKey.Space)))
             {
@@ -86,16 +54,6 @@ namespace PacMan.Service
                 ghost.PositionX = rnd.Next(0, WindowsGame.Width);
                 ghost.PositionY = rnd.Next(0, WindowsGame.Length);
             }
-        }
-
-        private static void UpdatePosition(ABody body, int newX, int newY, double speed)
-        {
-            _moveTimer += Raylib.GetFrameTime();
-            if (_moveTimer < 2.0 - speed)
-                return;
-            _moveTimer -= 2.0 - speed;
-
-            CheckPositionBeforeToUpdatePosition(body, newX, newY);
         }
     }
 }

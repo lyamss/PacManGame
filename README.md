@@ -43,6 +43,37 @@ class ABody {
     + "constructor" ABody(name : string, double Speed, int PositionX, int PositionY, Texture2D Texture)
 }
 
+class AGameLogicBase {
+  <<abstract>>
+    # _moveTimer : double
+    + "abstract" void UpdateGhostsPosition(Ghosts ghost)
+    + "abstract" void UpdatePacManPosition(BotPac botPac, Ghosts Ghosts)
+    + void DrawGhost(ABody body)
+    + void CheckStateGame(Ghosts Ghosts)
+    + void GhostIsDeadOrNo(BotPac botPac, Ghosts Ghosts)
+    # void CheckPositionBeforeToUpdatePosition(ABody body, int newX, int newY)
+    + "abstract" void UpdateRestartGame(Ghosts ghost)
+    # void UpdatePosition(ABody body, int newX, int newY, double speed)
+}
+
+
+class IGameLogic {
+  <<interface>>
+    + void UpdateRestartGame(Ghosts ghost)
+    + void GhostIsDeadOrNo(BotPac botPac, Ghosts Ghosts)
+    + void CheckStateGame(Ghosts Ghosts)
+    + void DrawGhost(ABody body)
+    + void UpdatePacManPosition(BotPac botPac, Ghosts Ghosts)
+    + void UpdateGhostsPosition(Ghosts ghost)
+}
+
+class GameLogic {
+  <<class>>
+    + "override" void UpdateGhostsPosition(Ghosts ghost)
+    + "override" void UpdatePacManPosition(BotPac botPac, Ghosts Ghosts)
+    + "override" void UpdateRestartGame(Ghosts ghost)
+}
+
 
 class BotPac {
   <<class>>
@@ -56,3 +87,5 @@ class Ghosts {
 
 BotPac --|> ABody
 Ghosts --|> ABody
+GameLogic --|> AGameLogicBase
+AGameLogicBase --|> IGameLogic
