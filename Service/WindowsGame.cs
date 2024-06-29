@@ -4,9 +4,9 @@ namespace PacMan.Service
 {
     public static class WindowsGame
     {
-        public static int Width { get; set; } = 460;
+        public static int Width { get; set; } = 0;
 
-        public static int Length { get; set; } = 506;
+        public static int Length { get; set; } = 0;
 
         public static void DrawDead()
         {

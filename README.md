@@ -54,6 +54,10 @@ class AGameLogicBase {
     # void CheckPositionBeforeToUpdatePosition(ABody body, int newX, int newY)
     + "abstract" void UpdateRestartGame(Ghosts ghost)
     # void UpdatePosition(ABody body, int newX, int newY, double speed)
+    + "constructor" AGameLogicBase()
+    # gameMap : int[,]
+    # bool IsWallCollision(int newX, int newY)
+    # void CreateMap()
 }
 
 
