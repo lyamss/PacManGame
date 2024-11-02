@@ -4,6 +4,8 @@ Pacman game in C# using raylib
 
 the objective is to flee the enemies and collect all the balls to win
 
+![PacManGame](./PacManGameImg.png)
+
 *Start projet*
 
 ```
